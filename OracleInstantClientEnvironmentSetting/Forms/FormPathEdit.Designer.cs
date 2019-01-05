@@ -40,7 +40,7 @@
             this.tsmi_save});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(511, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(416, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -60,7 +60,7 @@
             this.tb_path.Multiline = true;
             this.tb_path.Name = "tb_path";
             this.tb_path.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tb_path.Size = new System.Drawing.Size(511, 499);
+            this.tb_path.Size = new System.Drawing.Size(416, 325);
             this.tb_path.TabIndex = 1;
             this.tb_path.WordWrap = false;
             // 
@@ -68,12 +68,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 524);
+            this.ClientSize = new System.Drawing.Size(416, 350);
             this.Controls.Add(this.tb_path);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FormPathEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Path环境变量编辑";

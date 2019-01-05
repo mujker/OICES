@@ -40,10 +40,12 @@ namespace OracleInstantClientEnvironmentSetting.Forms
 		/// </summary>
 		private void ReadOrclSettings()
 		{
-			this.orclSet.ORACLE_HOME = Environment.GetEnvironmentVariable("ORACLE_HOME", EnvironmentVariableTarget.Machine);
-			this.orclSet.NLS_LANG    = Environment.GetEnvironmentVariable("NLS_LANG",    EnvironmentVariableTarget.Machine);
-			this.orclSet.TNS_ADMIN   = Environment.GetEnvironmentVariable("TNS_ADMIN",   EnvironmentVariableTarget.Machine);
-			this.orclSet.Path        = Environment.GetEnvironmentVariable("Path",        EnvironmentVariableTarget.Machine);
+			this.orclSet.ORACLE_HOME = Environment.GetEnvironmentVariable(
+				"ORACLE_HOME",
+				EnvironmentVariableTarget.Machine);
+			this.orclSet.NLS_LANG  = Environment.GetEnvironmentVariable("NLS_LANG",  EnvironmentVariableTarget.Machine);
+			this.orclSet.TNS_ADMIN = Environment.GetEnvironmentVariable("TNS_ADMIN", EnvironmentVariableTarget.Machine);
+			this.orclSet.Path      = Environment.GetEnvironmentVariable("Path",      EnvironmentVariableTarget.Machine);
 			this.SetPropertyGridSelObj();
 			FileHelper.WriteXml(this.orclSet);
 		}
@@ -146,10 +148,13 @@ namespace OracleInstantClientEnvironmentSetting.Forms
 		/// </summary>
 		private void WriteOrclSettings()
 		{
-			Environment.SetEnvironmentVariable("ORACLE_HOME", this.orclSet.ORACLE_HOME, EnvironmentVariableTarget.Machine);
-			Environment.SetEnvironmentVariable("NLS_LANG",    this.orclSet.NLS_LANG,    EnvironmentVariableTarget.Machine);
-			Environment.SetEnvironmentVariable("TNS_ADMIN",   this.orclSet.TNS_ADMIN,   EnvironmentVariableTarget.Machine);
-			Environment.SetEnvironmentVariable("Path",        this.orclSet.Path,        EnvironmentVariableTarget.Machine);
+			Environment.SetEnvironmentVariable(
+				"ORACLE_HOME",
+				this.orclSet.ORACLE_HOME,
+				EnvironmentVariableTarget.Machine);
+			Environment.SetEnvironmentVariable("NLS_LANG",  this.orclSet.NLS_LANG,  EnvironmentVariableTarget.Machine);
+			Environment.SetEnvironmentVariable("TNS_ADMIN", this.orclSet.TNS_ADMIN, EnvironmentVariableTarget.Machine);
+			Environment.SetEnvironmentVariable("Path",      this.orclSet.Path,      EnvironmentVariableTarget.Machine);
 		}
 	}
 }

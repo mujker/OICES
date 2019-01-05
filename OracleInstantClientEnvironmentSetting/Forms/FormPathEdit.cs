@@ -10,6 +10,7 @@
 namespace OracleInstantClientEnvironmentSetting.Forms
 {
 	using System;
+	using System.IO;
 	using System.Text;
 	using System.Windows.Forms;
 
@@ -67,7 +68,30 @@ namespace OracleInstantClientEnvironmentSetting.Forms
 					continue;
 				}
 
-				envPahtBuilder.Append($@"{line};");
+				Retry:
+				if (Directory.Exists(line))
+				{
+					envPahtBuilder.Append($@"{line};");
+					continue;
+				}
+				else
+				{
+					var result = MessageBox.Show(
+						$@"※无效路径※{Environment.NewLine}{line}",
+						@"路径异常提示",
+						MessageBoxButtons.AbortRetryIgnore,
+						MessageBoxIcon.Warning,
+						MessageBoxDefaultButton.Button1);
+					switch (result)
+					{
+						case DialogResult.Abort:
+							return;
+						case DialogResult.Ignore:
+							continue;
+						case DialogResult.Retry:
+							goto Retry;
+					}
+				}
 			}
 
 			this.EnvPath = envPahtBuilder.ToString();
