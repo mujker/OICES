@@ -1,81 +1,71 @@
-﻿using System;
-using System.IO;
-using System.Windows.Forms;
-using OracleInstantClientEnvironmentSetting.Comm;
-using OracleInstantClientEnvironmentSetting.Entities;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SettingMainForm.cs" company="DHC">
+//   Oracle精简客户端设置工具-主窗体
+// </copyright>
+// <summary>
+//   Defines the SettingMainForm type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace OracleInstantClientEnvironmentSetting.Forms
 {
+	using System;
+	using System.IO;
+	using System.Windows.Forms;
+
+	using OracleInstantClientEnvironmentSetting.Comm;
+	using OracleInstantClientEnvironmentSetting.Entities;
+
+	/// <summary>
+	/// The setting main form.
+	/// </summary>
 	public partial class SettingMainForm : Form
 	{
-		OracleSettingsEntity orclSet = new OracleSettingsEntity();
+		/// <summary>
+		/// Oracle环境变量对象
+		/// </summary>
+		private OracleSettingsEntity orclSet = new OracleSettingsEntity();
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="SettingMainForm"/> class.
+		/// </summary>
 		public SettingMainForm()
 		{
-			InitializeComponent();
-			tsmi_rest_Click(null, null);
+			this.InitializeComponent();
+			this.TsmiRestClick(null, null);
 		}
 
+		/// <summary>
+		/// 读取系统环境变量
+		/// </summary>
 		private void ReadOrclSettings()
 		{
-			orclSet.ORACLE_HOME = Environment.GetEnvironmentVariable("ORACLE_HOME", EnvironmentVariableTarget.Machine);
-			orclSet.NLS_LANG    = Environment.GetEnvironmentVariable("NLS_LANG",    EnvironmentVariableTarget.Machine);
-			orclSet.TNS_ADMIN   = Environment.GetEnvironmentVariable("TNS_ADMIN",   EnvironmentVariableTarget.Machine);
-			orclSet.Path        = Environment.GetEnvironmentVariable("Path",        EnvironmentVariableTarget.Machine);
-			SetPropertyGridSelObj();
-			FileHelper.WriteXml(orclSet);
+			this.orclSet.ORACLE_HOME = Environment.GetEnvironmentVariable("ORACLE_HOME", EnvironmentVariableTarget.Machine);
+			this.orclSet.NLS_LANG    = Environment.GetEnvironmentVariable("NLS_LANG",    EnvironmentVariableTarget.Machine);
+			this.orclSet.TNS_ADMIN   = Environment.GetEnvironmentVariable("TNS_ADMIN",   EnvironmentVariableTarget.Machine);
+			this.orclSet.Path        = Environment.GetEnvironmentVariable("Path",        EnvironmentVariableTarget.Machine);
+			this.SetPropertyGridSelObj();
+			FileHelper.WriteXml(this.orclSet);
 		}
 
+		/// <summary>
+		/// The set property grid sel obj.
+		/// </summary>
 		private void SetPropertyGridSelObj()
 		{
-			propertyGrid1.SelectedObject = orclSet;
-		}
-
-		private void WriteOrclSettings()
-		{
-			Environment.SetEnvironmentVariable("ORACLE_HOME", orclSet.ORACLE_HOME, EnvironmentVariableTarget.Machine);
-			Environment.SetEnvironmentVariable("NLS_LANG",    orclSet.NLS_LANG,    EnvironmentVariableTarget.Machine);
-			Environment.SetEnvironmentVariable("TNS_ADMIN",   orclSet.TNS_ADMIN,   EnvironmentVariableTarget.Machine);
-			Environment.SetEnvironmentVariable("Path",        orclSet.Path,        EnvironmentVariableTarget.Machine);
+			this.propertyGrid1.SelectedObject = this.orclSet;
 		}
 
 		/// <summary>
-		/// 保存设置
+		/// The tsmi resetfromfile click.
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void tsmi_save_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				WriteOrclSettings();
-				UpdateStatus("环境变量修改完成！");
-			}
-			catch (Exception exception)
-			{
-				UpdateStatus(exception.Message);
-			}
-		}
-
-		/// <summary>
-		/// 重新读取系统配置
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void tsmi_rest_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				ReadOrclSettings();
-				UpdateStatus("环境变量读取成功！");
-			}
-			catch (Exception exception)
-			{
-				UpdateStatus(exception.Message);
-			}
-		}
-
-		private void tsmi_resetfromfile_Click(object sender, EventArgs e)
+		/// <param name="sender">
+		/// The sender.
+		/// </param>
+		/// <param name="e">
+		/// The e.
+		/// </param>
+		private void TsmiResetfromfileClick(object sender, EventArgs e)
 		{
 			try
 			{
@@ -84,21 +74,82 @@ namespace OracleInstantClientEnvironmentSetting.Forms
 				{
 					if (File.Exists(dialog.FileName))
 					{
-						orclSet = FileHelper.ReadXml(dialog.FileName);
-						SetPropertyGridSelObj();
-						UpdateStatus("文件数据已恢复……");
+						this.orclSet = FileHelper.ReadXml(dialog.FileName);
+						this.SetPropertyGridSelObj();
+						this.UpdateStatus("文件数据已恢复……");
 					}
 				}
 			}
 			catch (Exception exception)
 			{
-				UpdateStatus(exception.Message);
+				this.UpdateStatus(exception.Message);
 			}
 		}
 
+		/// <summary>
+		/// The tsmi rest click.
+		/// </summary>
+		/// <param name="sender">
+		/// The sender.
+		/// </param>
+		/// <param name="e">
+		/// The e.
+		/// </param>
+		private void TsmiRestClick(object sender, EventArgs e)
+		{
+			try
+			{
+				this.ReadOrclSettings();
+				this.UpdateStatus("环境变量读取成功！");
+			}
+			catch (Exception exception)
+			{
+				this.UpdateStatus(exception.Message);
+			}
+		}
+
+		/// <summary>
+		/// The tsmi save click.
+		/// </summary>
+		/// <param name="sender">
+		/// The sender.
+		/// </param>
+		/// <param name="e">
+		/// The e.
+		/// </param>
+		private void TsmiSaveClick(object sender, EventArgs e)
+		{
+			try
+			{
+				this.WriteOrclSettings();
+				this.UpdateStatus("环境变量修改完成！");
+			}
+			catch (Exception exception)
+			{
+				this.UpdateStatus(exception.Message);
+			}
+		}
+
+		/// <summary>
+		/// 更新状态栏
+		/// </summary>
+		/// <param name="msg">
+		/// The msg.
+		/// </param>
 		private void UpdateStatus(string msg)
 		{
-			toolstrip_status.Text = msg;
+			this.toolstrip_status.Text = msg;
+		}
+
+		/// <summary>
+		/// 写入环境变量
+		/// </summary>
+		private void WriteOrclSettings()
+		{
+			Environment.SetEnvironmentVariable("ORACLE_HOME", this.orclSet.ORACLE_HOME, EnvironmentVariableTarget.Machine);
+			Environment.SetEnvironmentVariable("NLS_LANG",    this.orclSet.NLS_LANG,    EnvironmentVariableTarget.Machine);
+			Environment.SetEnvironmentVariable("TNS_ADMIN",   this.orclSet.TNS_ADMIN,   EnvironmentVariableTarget.Machine);
+			Environment.SetEnvironmentVariable("Path",        this.orclSet.Path,        EnvironmentVariableTarget.Machine);
 		}
 	}
 }

@@ -57,7 +57,7 @@
             this.tsmi_save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.tsmi_save.Size = new System.Drawing.Size(88, 21);
             this.tsmi_save.Text = "保存(Ctrl+S)";
-            this.tsmi_save.Click += new System.EventHandler(this.tsmi_save_Click);
+            this.tsmi_save.Click += new System.EventHandler(this.TsmiSaveClick);
             // 
             // tsmi_rest
             // 
@@ -65,14 +65,14 @@
             this.tsmi_rest.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.tsmi_rest.Size = new System.Drawing.Size(89, 21);
             this.tsmi_rest.Text = "重新读取(F5)";
-            this.tsmi_rest.Click += new System.EventHandler(this.tsmi_rest_Click);
+            this.tsmi_rest.Click += new System.EventHandler(this.TsmiRestClick);
             // 
             // tsmi_resetfromfile
             // 
             this.tsmi_resetfromfile.Name = "tsmi_resetfromfile";
-            this.tsmi_resetfromfile.Size = new System.Drawing.Size(80, 21);
-            this.tsmi_resetfromfile.Text = "从文件恢复";
-            this.tsmi_resetfromfile.Click += new System.EventHandler(this.tsmi_resetfromfile_Click);
+            this.tsmi_resetfromfile.Size = new System.Drawing.Size(104, 21);
+            this.tsmi_resetfromfile.Text = "从备份文件恢复";
+            this.tsmi_resetfromfile.Click += new System.EventHandler(this.TsmiResetfromfileClick);
             // 
             // propertyGrid1
             // 

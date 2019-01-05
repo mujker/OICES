@@ -1,30 +1,66 @@
-﻿using System;
-using System.Text;
-using System.Windows.Forms;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="FormPathEdit.cs" company="DHC">
+//   修改 环境变量 Path 窗体
+// </copyright>
+// <summary>
+//   The form path edit.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace OracleInstantClientEnvironmentSetting.Forms
 {
+	using System;
+	using System.Text;
+	using System.Windows.Forms;
+
+	/// <summary>
+	///     The form path edit.
+	/// </summary>
 	public partial class FormPathEdit : Form
 	{
-		public string EnvPath { get; set; }
-
+		/// <summary>
+		///     Initializes a new instance of the <see cref="FormPathEdit" /> class.
+		/// </summary>
 		public FormPathEdit()
 		{
-			InitializeComponent();
+			this.InitializeComponent();
 		}
 
-		private void FormPathEdit_Load(object sender, EventArgs e)
+		/// <summary>
+		///     Gets or sets the env path.
+		/// </summary>
+		public string EnvPath { get; set; }
+
+		/// <summary>
+		/// The form path edit_ load.
+		/// </summary>
+		/// <param name="sender">
+		/// The sender.
+		/// </param>
+		/// <param name="e">
+		/// The e.
+		/// </param>
+		private void FormPathEditLoad(object sender, EventArgs e)
 		{
-			tb_path.Text = string.Empty;
-			var pathStrings = EnvPath.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries);
-			tb_path.Lines = pathStrings;
-			tb_path.Select(tb_path.Text.Length, 0);
+			this.tb_path.Text = string.Empty;
+			var pathStrings = this.EnvPath.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+			this.tb_path.Lines = pathStrings;
+			this.tb_path.Select(this.tb_path.Text.Length, 0);
 		}
 
-		private void tsmi_save_Click(object sender, EventArgs e)
+		/// <summary>
+		/// The tsmi_save_ click.
+		/// </summary>
+		/// <param name="sender">
+		/// The sender.
+		/// </param>
+		/// <param name="e">
+		/// The e.
+		/// </param>
+		private void TsmiSaveClick(object sender, EventArgs e)
 		{
 			StringBuilder envPahtBuilder = new StringBuilder();
-			foreach (string line in tb_path.Lines)
+			foreach (string line in this.tb_path.Lines)
 			{
 				if (string.IsNullOrWhiteSpace(line))
 				{
@@ -34,10 +70,10 @@ namespace OracleInstantClientEnvironmentSetting.Forms
 				envPahtBuilder.Append($@"{line};");
 			}
 
-			EnvPath = envPahtBuilder.ToString();
+			this.EnvPath = envPahtBuilder.ToString();
 
-			DialogResult = DialogResult.OK;
-			Close();
+			this.DialogResult = DialogResult.OK;
+			this.Close();
 		}
 	}
 }

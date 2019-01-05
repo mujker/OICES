@@ -50,7 +50,7 @@
             this.tsmi_save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.tsmi_save.Size = new System.Drawing.Size(124, 21);
             this.tsmi_save.Text = "保存并退出(Ctrl+S)";
-            this.tsmi_save.Click += new System.EventHandler(this.tsmi_save_Click);
+            this.tsmi_save.Click += new System.EventHandler(this.TsmiSaveClick);
             // 
             // tb_path
             // 
@@ -77,7 +77,7 @@
             this.Name = "FormPathEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Path环境变量编辑";
-            this.Load += new System.EventHandler(this.FormPathEdit_Load);
+            this.Load += new System.EventHandler(this.FormPathEditLoad);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
