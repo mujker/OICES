@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 using OracleInstantClientEnvironmentSetting.Entities;
 
@@ -17,7 +16,13 @@ namespace OracleInstantClientEnvironmentSetting.Comm
 				builder.AppendLine($"{property.Name}={property.GetValue(obj)}");
 			}
 
-			string path = $@"{System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase}{DateTime.Now.ToFileTime()}.xml";
+			var folderPath = $@"{System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase}backup\";
+			if (!Directory.Exists(folderPath))
+			{
+				Directory.CreateDirectory(folderPath);
+			}
+
+			string path = $@"{folderPath}{DateTime.Now.ToFileTime()}.xml";
 			File.WriteAllText(path, builder.ToString());
 		}
 

@@ -47,8 +47,9 @@
             // tsmi_save
             // 
             this.tsmi_save.Name = "tsmi_save";
-            this.tsmi_save.Size = new System.Drawing.Size(80, 21);
-            this.tsmi_save.Text = "保存并退出";
+            this.tsmi_save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.tsmi_save.Size = new System.Drawing.Size(124, 21);
+            this.tsmi_save.Text = "保存并退出(Ctrl+S)";
             this.tsmi_save.Click += new System.EventHandler(this.tsmi_save_Click);
             // 
             // tb_path
