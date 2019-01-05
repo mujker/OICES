@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Windows.Forms;
 
 namespace OracleInstantClientEnvironmentSetting.Forms
@@ -22,6 +23,7 @@ namespace OracleInstantClientEnvironmentSetting.Forms
 
 		private void tsmi_save_Click(object sender, EventArgs e)
 		{
+			StringBuilder envPahtBuilder = new StringBuilder();
 			foreach (string line in tb_path.Lines)
 			{
 				if (string.IsNullOrWhiteSpace(line))
@@ -29,8 +31,10 @@ namespace OracleInstantClientEnvironmentSetting.Forms
 					continue;
 				}
 
-				EnvPath += $@"{line};";
+				envPahtBuilder.Append($@"{line};");
 			}
+
+			EnvPath = envPahtBuilder.ToString();
 
 			DialogResult = DialogResult.OK;
 			Close();
